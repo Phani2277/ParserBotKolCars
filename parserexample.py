@@ -7,18 +7,36 @@ user = fake_useragent.UserAgent().random
 
 header = {'user-agent': user}
 
-pages = 2
+pages = 1
 yearFrom = "2010"
+yearTo = "2015"
 priceFrom = "2000000"
+priceTo = "4000000"
+carBody = "sedan/"
+Kpp = "2"
+
 
 
 for page in range(1, pages+1):
 
-    link = "https://kolesa.kz/cars/astana/?year[from]="+ yearFrom + "&price[from]=" + priceFrom + "&page" + str(page)
+    
+    param = ["auto-car-transm="+Kpp]
 
+    if yearFrom != "":
+        param.append("year[from]=" + yearFrom)
+    if yearTo != "":
+        param.append("year[to]=" + yearTo)
+    if priceFrom != "":
+        param.append("price[from]=" + priceFrom)
+    if priceTo != "":
+        param.append("price[to]=" + priceTo)
+    
+    
+    link = "https://kolesa.kz/cars/" + carBody + "astana/?" + "&".join(param)+"&page=" + str(page)
     time.sleep(1)
     # responce = requests.get(link, headers=header)
     responce = requests.get(link)
+    print(link)
 
 
     
