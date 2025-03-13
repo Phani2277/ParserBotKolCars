@@ -36,70 +36,112 @@ async def start(message: aiogram.types.Message, state: FSMContext):
 
 @router.message(dataTO.carsBodyClass)
 async def recCarbody(message: aiogram.types.Message, state: FSMContext):
-    match message.text:
-        case "седан":
-            await state.update_data(carsBodyClass="sedan/")
-        case "универсал":
-            await state.update_data(carsBodyClass="station-wagon/")
-        case "хэтчбек":
-            await state.update_data(carsBodyClass="hatchback/")
-        case "лимузин":
-            await state.update_data(carsBodyClass="limousine/")
-        case "купе":
-            await state.update_data(carsBodyClass="body-coupe/")
-        case "родстер":
-            await state.update_data(carsBodyClass="body-roadster/")
-        case "кабриолет":
-            await state.update_data(carsBodyClass="cabriolet/")
-        case "внедорожник":
-            await state.update_data(carsBodyClass="suv/")
-        case "кроссовер":
-            await state.update_data(carsBodyClass="crossover-suv/")
-        case "микровэн":
-            await state.update_data(carsBodyClass="microvan/")
-        case "минивэн":
-            await state.update_data(carsBodyClass="minivan/")
-        case "микроавтобус":
-            await state.update_data(carsBodyClass="van/")
-        case "фургон":
-            await state.update_data(carsBodyClass="wagon/")
-        case "пикап":
-            await state.update_data(carsBodyClass="body-pickup/")
-        case "тарга":
-            await state.update_data(carsBodyClass="targa/")
-        case "фастбек":
-            await state.update_data(carsBodyClass="fastback/")
-        case "лифтбек":
-            await state.update_data(carsBodyClass="liftback/")
-        case "хардтоп":
-            await state.update_data(carsBodyClass="hardtop/")
-        case "Ничего":
-            await state.update_data(carsBodyClass="")
+    # match message.text:
+    #     case "седан":
+    #         await state.update_data(carsBodyClass="sedan/")
+    #     case "универсал":
+    #         await state.update_data(carsBodyClass="station-wagon/")
+    #     case "хэтчбек":
+    #         await state.update_data(carsBodyClass="hatchback/")
+    #     case "лимузин":
+    #         await state.update_data(carsBodyClass="limousine/")
+    #     case "купе":
+    #         await state.update_data(carsBodyClass="body-coupe/")
+    #     case "родстер":
+    #         await state.update_data(carsBodyClass="body-roadster/")
+    #     case "кабриолет":
+    #         await state.update_data(carsBodyClass="cabriolet/")
+    #     case "внедорожник":
+    #         await state.update_data(carsBodyClass="suv/")
+    #     case "кроссовер":
+    #         await state.update_data(carsBodyClass="crossover-suv/")
+    #     case "микровэн":
+    #         await state.update_data(carsBodyClass="microvan/")
+    #     case "минивэн":
+    #         await state.update_data(carsBodyClass="minivan/")
+    #     case "микроавтобус":
+    #         await state.update_data(carsBodyClass="van/")
+    #     case "фургон":
+    #         await state.update_data(carsBodyClass="wagon/")
+    #     case "пикап":
+    #         await state.update_data(carsBodyClass="body-pickup/")
+    #     case "тарга":
+    #         await state.update_data(carsBodyClass="targa/")
+    #     case "фастбек":
+    #         await state.update_data(carsBodyClass="fastback/")
+    #     case "лифтбек":
+    #         await state.update_data(carsBodyClass="liftback/")
+    #     case "хардтоп":
+    #         await state.update_data(carsBodyClass="hardtop/")
+    #     case "Ничего":
+    #         await state.update_data(carsBodyClass="")
 
-        
     
+    car_body_class_map = {
+    "седан": "sedan/",
+    "универсал": "station-wagon/",
+    "хэтчбек": "hatchback/",
+    "лимузин": "limousine/",
+    "купе": "body-coupe/",
+    "родстер": "body-roadster/",
+    "кабриолет": "cabriolet/",
+    "внедорожник": "suv/",
+    "кроссовер": "crossover-suv/",
+    "микровэн": "microvan/",
+    "минивэн": "minivan/",
+    "микроавтобус": "van/",
+    "фургон": "wagon/",
+    "пикап": "body-pickup/",
+    "тарга": "targa/",
+    "фастбек": "fastback/",
+    "лифтбек": "liftback/",
+    "хардтоп": "hardtop/",
+    "Ничего": ""
+    }
+
+    
+    body_class = car_body_class_map.get(message.text, "")
+
+    
+    await state.update_data(carsBodyClass=body_class)
+
+   
     await state.set_state(dataTO.userKDD)
     await message.answer("Выбери КПП", reply_markup=keyboard.carKDDKeyboard)
 
 
 @router.message(dataTO.userKDD)
 async def recKDD(message: aiogram.types.Message, state: FSMContext):
-    match message.text:
-        case "механика":
-            await state.update_data(userKDD="1")
-        case "АКПП":
-            await state.update_data(userKDD="2345")
-        case "Автомат":
-            await state.update_data(userKDD="2")
-        case "Типтроник":
-            await state.update_data(userKDD="3")
-        case "Вариатор":
-            await state.update_data(userKDD="4")
-        case "Робот":
-            await state.update_data(userKDD="5")
-        case "Ничего":
-            await state.update_data(userKDD="")
+    # match message.text:
+    #     case "механика":
+    #         await state.update_data(userKDD="1")
+    #     case "АКПП":
+    #         await state.update_data(userKDD="2345")
+    #     case "Автомат":
+    #         await state.update_data(userKDD="2")
+    #     case "Типтроник":
+    #         await state.update_data(userKDD="3")
+    #     case "Вариатор":
+    #         await state.update_data(userKDD="4")
+    #     case "Робот":
+    #         await state.update_data(userKDD="5")
+    #     case "Ничего":
+    #         await state.update_data(userKDD="")
         
+    kdd_map = {
+    "механика": "1",
+    "АКПП": "2345",
+    "Автомат": "2",
+    "Типтроник": "3",
+    "Вариатор": "4",
+    "Робот": "5",
+    "Ничего": ""
+    }
+
+    user_kdd_value = kdd_map.get(message.text, "")
+
+
+    await state.update_data(userKDD=user_kdd_value)
 
 
     await state.set_state(dataTO.userFromYear)
